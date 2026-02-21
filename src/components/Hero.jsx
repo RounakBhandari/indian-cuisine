@@ -7,7 +7,7 @@ const Hero = () => {
       {/* Background Image */}
       <motion.div
         initial={{ opacity: 0, scale: 1.2 }}
-        animate={{ opacity: 0.6, scale: 1 }}
+        animate={{ opacity: 0.5, scale: 1 }}
         transition={{ duration: 1.5 }}
         className="absolute inset-0"
       >

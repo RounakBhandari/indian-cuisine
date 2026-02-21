@@ -3,13 +3,25 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [currentLang, setCurrentLang] = useState("EN");
+
+  const handleTranslate = (langCode) => {
+    // Google creates a select dropdown with this class
+    const googleCombo = document.querySelector(".goog-te-combo");
+    
+    if (googleCombo) {
+      googleCombo.value = langCode;
+      googleCombo.dispatchEvent(new Event("change"));
+      setCurrentLang(langCode === "en" ? "EN" : "AT");
+    } else {
+      console.error("Google Translate script hasn't loaded yet.");
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
-      // Trigger transition after scrolling 100px
       setScrolled(window.scrollY > 300);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -20,65 +32,54 @@ const Navbar = () => {
     <motion.nav
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{duration: 3, delay: 1 }}
+      transition={{ duration: 2, delay: 0.5 }}
       className={`fixed w-full z-50 transition-all duration-500 ${
-        scrolled 
-          ? "bg-black/30  py-6 shadow-lg" 
-          : "bg-transparent py-8"
+        scrolled ? "bg-black/90 py-4 shadow-lg" : "bg-transparent py-8"
       }`}
     >
-      <div 
-        className={`max-w-7xl mx-auto px-10 flex items-center transition-all duration-500 ${
+      <div className={`max-w-7xl mx-auto px-10 flex items-center transition-all duration-500 ${
           scrolled ? "justify-between" : "justify-center"
         }`}
       >
-        
-        {/* Logo - Only shows when scrolled */}
+        {/* Logo Section */}
         <AnimatePresence>
           {scrolled && (
-            <div className="flex justify-between gap-1">        
-            <motion.img
-                src="/tajmahal.png"
-                alt="Indian Cuisine Logo"
-                className="w-16 object-contain -mt-2"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1.5 }}
-            />
-            
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{duration: 3}}
-              className="text-white text-2xl mt-2 font-bold tracking-widest"
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              className="flex items-center gap-2"
             >
-              INDIAN <span className="text-yellow-500">CUISINE</span>
+              <img src="/tajmahal.png" alt="Logo" className="w-12 h-12 object-contain" />
+              <div className="text-white text-xl font-bold tracking-widest">
+                INDIAN <span className="text-yellow-500">CUISINE</span>
+              </div>
             </motion.div>
-            </div>
           )}
         </AnimatePresence>
 
-        {/* Links - They move smoothly due to the "layout" prop */}
-        <motion.div 
-          layout
-          transition={{ type: "spring", stiffness: 100, damping: 40 }}
-          className="flex gap-16 text-white font-medium items-center"
-        >
-          {navLinks.map((item) => (
-            <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
-              className="relative group cursor-pointer text-lg uppercase tracking-widest"
-            >
-              {item}
-              <span className="absolute left-0 -bottom-1 w-0 h-[1px] bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
-            </a>    
-          ))}
-        </motion.div>
+        {/* Links & Language Toggle Container */}
+        <div className="flex items-center gap-12">
+          <motion.div layout className="flex gap-10 text-white font-medium items-center">
+            {navLinks.map((item) => (
+              <a key={item} href={`#${item.toLowerCase()}`} className="text-sm uppercase tracking-widest hover:text-yellow-500 transition-colors">
+                {item}
+              </a>
+            ))}
+          </motion.div>
 
-        {/* Spacer for Desktop Scrolled state to keep links centered-ish if desired */}
-        {/* If you want links all the way to the right, we leave this as is. */}
+          {/* Toggle Button */}
+          <button 
+            onClick={() => handleTranslate(currentLang === "EN" ? "de" : "en")} 
+            className="px-3 py-1 border border-yellow-500 text-yellow-500 text-xs rounded hover:bg-yellow-500 hover:text-black transition-all font-bold"
+          >
+            {currentLang === "EN" ? "AT" : "EN"}
+          </button>
+        </div>
       </div>
+
+      {/* Required hidden element for Google */}
+      <div id="google_translate_element" style={{ display: "none" }}></div>
     </motion.nav>
   );
 };
