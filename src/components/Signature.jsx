@@ -87,7 +87,7 @@ const Signature = () => {
   };
 
   return (
-    <section className="relative bg-black text-white py-40 overflow-hidden">
+    <section className="relative bg-black text-white py-40 pb-3 overflow-hidden">
 
       {/* Header */}
       <div className="text-center mb-24">
@@ -104,7 +104,7 @@ const Signature = () => {
       {/* Container */}
       <div
         ref={containerRef}
-        className="max-w-7xl mx-auto overflow-hidden px-6 py-5 pb-20"
+        className="max-w-7xl mx-auto overflow-hidden px-6 py-5 pb-12 "
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
@@ -191,10 +191,11 @@ const Signature = () => {
 
       {/* Spotlight glow */}
       <div className="
-        pointer-events-none absolute inset-0 flex justify-center
+        pointer-events-none absolute inset-0 flex justify-center top-72
       ">
         <div className="
           w-[500px]
+          h-[300px]
           bg-gradient-to-r
           from-transparent
           via-yellow-500/20

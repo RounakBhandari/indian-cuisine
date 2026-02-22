@@ -35,7 +35,7 @@ const Intro = () => {
             Meets Luxury
           </h2>
 
-          <p className="text-gray-400 leading-relaxed mb-8 text-lg">
+          <p className="text-gray-400 leading-relaxed mb-8 text-lg text-justify">
             Step into Indian Cuisine and discover a world where authentic Indian
             and Nepali flavors meet elegant fine dining. Every dish tells a story
             of heritage, passion, and unforgettable taste.
