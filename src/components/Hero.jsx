@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-
+import { Link } from "react-router-dom";
 const Hero = () => {
   return (
     <section className="relative h-screen w-full flex items-center justify-center bg-black overflow-hidden" id="#home">
@@ -53,6 +53,7 @@ const Hero = () => {
         </motion.p>
 
         {/* Button */}
+        <Link to="/menu">
         <motion.button
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -65,7 +66,7 @@ const Hero = () => {
         >
           EXPLORE MENU
         </motion.button>
-
+        </Link>    
       </div>
 
     </section>

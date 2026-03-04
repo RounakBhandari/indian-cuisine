@@ -1,16 +1,18 @@
-import Experience from "./components/Experience";
-import Hero from "./components/Hero";
-import Intro from "./components/Intro";
+import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Signature from "./components/Signature";
 import Home from "./pages/Home";
-
+import About from "./pages/About";
+import Menu from "./pages/Menu";
 const App = () => {
   return (
-    <div>
+    <>
       <Navbar/>
-      <Home/>
-    </div>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/about" element={<About/>}/>
+        <Route path="/menu" element={<Menu/>}/>
+      </Routes>
+    </>
   );
 };
 

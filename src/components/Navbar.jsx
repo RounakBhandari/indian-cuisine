@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -56,26 +57,55 @@ const Navbar = () => {
           )}
         </AnimatePresence>
 
-        {/* Links - They move smoothly due to the "layout" prop */}
         <motion.div 
           layout
           transition={{ type: "spring", stiffness: 100, damping: 40 }}
           className="flex gap-16 text-white font-medium items-center"
         >
-          {navLinks.map((item) => (
-            <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
+            <Link
+              key={"Home"}
+              to={'/'}
               className="relative group cursor-pointer text-lg uppercase tracking-widest"
             >
-              {item}
+              Home
               <span className="absolute left-0 -bottom-1 w-0 h-[1px] bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
-            </a>    
-          ))}
+            </Link>    
+            <Link
+              key={"About"}
+              to={'/about'}
+              className="relative group cursor-pointer text-lg uppercase tracking-widest"
+            >
+              About
+              <span className="absolute left-0 -bottom-1 w-0 h-[1px] bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
+            </Link>  
+            <Link
+              key={"Menu"}
+              to={'/menu'}
+              className="relative group cursor-pointer text-lg uppercase tracking-widest"
+            >
+              Menu
+              <span className="absolute left-0 -bottom-1 w-0 h-[1px] bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
+            </Link>    
+            <Link
+              key={"Gallery"}
+              to={'/gallery'}
+              className="relative group cursor-pointer text-lg uppercase tracking-widest"
+            >
+              Gallery
+              <span className="absolute left-0 -bottom-1 w-0 h-[1px] bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
+            </Link>
+            <Link
+              key={"Contact"}
+              to={'/contact'}
+              className="relative group cursor-pointer text-lg uppercase tracking-widest"
+            >
+              Contact
+              <span className="absolute left-0 -bottom-1 w-0 h-[1px] bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
+            </Link>
+                                  
+          
         </motion.div>
 
-        {/* Spacer for Desktop Scrolled state to keep links centered-ish if desired */}
-        {/* If you want links all the way to the right, we leave this as is. */}
       </div>
     </motion.nav>
   );
